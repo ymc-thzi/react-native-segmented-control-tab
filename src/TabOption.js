@@ -20,9 +20,11 @@ type Props = {
   badge?: any,
   iconComponent?: any,
   text: string,
+  viewMode: string,
   firstTabStyle?: ViewStyleProp,
   lastTabStyle?: ViewStyleProp,
   tabStyle?: ViewStyleProp,
+  columnModeTabStyle: ViewStyleProp,
   activeTabStyle?: ViewStyleProp,
   tabTextStyle?: TextStyleProp,
   activeTabTextStyle?: TextStyleProp,
@@ -78,6 +80,14 @@ const styles = StyleSheet.create({
   activeTabBadgeStyle: {
     color: 'black',
   },
+  columnModeTabStyle: {
+    borderRightWidth: 1,
+    borderLeftWidth: 1,
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+  }
 })
 
 export default class TabOption extends PureComponent<Props> {
@@ -86,9 +96,11 @@ export default class TabOption extends PureComponent<Props> {
     index: 0,
     badge: '',
     iconComponent: '',
+    viewMode: '',
     firstTabStyle: {},
     lastTabStyle: {},
     tabStyle: {},
+    columnModeTabStyle: {},
     activeTabStyle: {},
     tabTextStyle: {},
     activeTabTextStyle: {},
@@ -113,9 +125,11 @@ export default class TabOption extends PureComponent<Props> {
       badge,
       iconComponent,
       text,
+      viewMode,
       firstTabStyle,
       lastTabStyle,
       tabStyle,
+      columnModeTabStyle,
       activeTabStyle,
       tabTextStyle,
       activeTabTextStyle,
@@ -140,6 +154,8 @@ export default class TabOption extends PureComponent<Props> {
           isTabActive ? [styles.activeTabStyle, activeTabStyle] : {},
           firstTabStyle,
           lastTabStyle,
+          viewMode === 'col' && styles.columnModeTabStyle,
+          columnModeTabStyle
         ]}
         accessible={accessible}
         testID={testID}

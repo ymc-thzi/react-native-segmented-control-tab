@@ -13,6 +13,8 @@ import TabOption from './TabOption'
 
 type Props = {
   tabStyle: ViewStyleProp,
+  columnModeContainerStyle: ViewStyleProp,
+  columnModeTabStyle: ViewStyleProp,
   firstTabStyle: ViewStyleProp,
   lastTabStyle: ViewStyleProp,
   activeTabStyle: ViewStyleProp,
@@ -55,6 +57,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: 'white',
   },
+  columnModeContainerStyle: {
+    flexDirection: 'col', 
+  }
 })
 const handleTabPress = (
   index: number,
@@ -106,6 +111,8 @@ export default class SegmentedControlTab extends PureComponent<Props> {
     tabsContainerStyle: {},
     tabsContainerDisableStyle: { opacity: 0.6 },
     tabStyle: {},
+    columnModeContainerStyle: {},
+    columnModeTabStyle: {},
     firstTabStyle: {},
     lastTabStyle: {},
     activeTabStyle: {},
@@ -135,6 +142,8 @@ export default class SegmentedControlTab extends PureComponent<Props> {
       tabsContainerStyle,
       tabsContainerDisableStyle,
       tabStyle,
+      columnModeContainerStyle,
+      columnModeTabStyle,
       firstTabStyle,
       lastTabStyle,
       activeTabStyle,
@@ -172,8 +181,14 @@ export default class SegmentedControlTab extends PureComponent<Props> {
     if (!enabled) {
       tabsContainerStyles.push(tabsContainerDisableStyle)
     }
+
+    let viewMode = 'row'
+    if (values && values.length > 3) { 
+      viewMode = 'col'
+    }
+
     return (
-      <View style={tabsContainerStyles} removeClippedSubviews={false}>
+      <View style={[tabsContainerStyles, viewMode === 'col' && styles.columnModeContainerStyle, viewMode === 'col' && columnModeContainerStyle]} removeClippedSubviews={false}>
         {values && values.map((item, index) => {
           const accessibilityText = getAccessibilityLabelByIndex(
             accessibilityLabels,
@@ -198,6 +213,8 @@ export default class SegmentedControlTab extends PureComponent<Props> {
               textNumberOfLines={textNumberOfLines}
               onTabPress={indexs => handleTabPress(indexs, multiple, selectedIndex, onTabPress)
               }
+              viewMode={viewMode}
+              columnModeTabStyle={columnModeTabStyle}
               firstTabStyle={
                 index === 0 ? [{ borderRightWidth: 0 }, firstTabStyleDefault, firstTabStyle] : {}
               }
