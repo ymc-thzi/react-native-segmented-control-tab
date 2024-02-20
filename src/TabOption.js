@@ -18,6 +18,7 @@ type Props = {
   isTabActive?: boolean,
   index?: number,
   badge?: any,
+  iconComponent?: any,
   text: string,
   firstTabStyle?: ViewStyleProp,
   lastTabStyle?: ViewStyleProp,
@@ -84,6 +85,7 @@ export default class TabOption extends PureComponent<Props> {
     isTabActive: false,
     index: 0,
     badge: '',
+    iconComponent: '',
     firstTabStyle: {},
     lastTabStyle: {},
     tabStyle: {},
@@ -109,6 +111,7 @@ export default class TabOption extends PureComponent<Props> {
       isTabActive,
       index,
       badge,
+      iconComponent,
       text,
       firstTabStyle,
       lastTabStyle,
@@ -147,10 +150,14 @@ export default class TabOption extends PureComponent<Props> {
         disabled={!enabled}
         activeOpacity={activeTabOpacity}
       >
-        <View style={{ flexDirection: 'row' }}>
+        <View style={[{ flexDirection: 'row' }, iconComponent ? { marginLeft: 12 } : {}]}>
+          <View style={{ marginRight: 4 }}>
+            {iconComponent}
+          </View>
           <Text
             style={[
               styles.tabTextStyle,
+              iconComponent ? { paddingRight: 12 } : {},
               tabTextStyle,
               isTabActive
                 ? [styles.activeTabTextStyle, activeTabTextStyle]

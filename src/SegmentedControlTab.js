@@ -30,6 +30,7 @@ type Props = {
   enabled: boolean,
   values: string[],
   badges: string[],
+  iconComponents: string[],
   multiple: boolean,
   selectedIndex: number,
   selectedIndices: number[],
@@ -97,6 +98,7 @@ export default class SegmentedControlTab extends PureComponent<Props> {
     accessibilityLabels: [],
     testIDs: [],
     badges: ['', '', ''],
+    iconComponents: ['', '', ''],
     multiple: false,
     selectedIndex: 0,
     selectedIndices: [0],
@@ -128,6 +130,7 @@ export default class SegmentedControlTab extends PureComponent<Props> {
       selectedIndices,
       values,
       badges,
+      iconComponents,
       borderRadius,
       tabsContainerStyle,
       tabsContainerDisableStyle,
@@ -185,6 +188,7 @@ export default class SegmentedControlTab extends PureComponent<Props> {
               key={item}
               index={index}
               badge={badges && badges[index] ? badges[index] : false}
+              iconComponent={iconComponents && iconComponents[index] ? iconComponents[index] : false}
               isTabActive={
                 multiple
                   ? selectedIndices.includes(index)
