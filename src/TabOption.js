@@ -155,7 +155,7 @@ export default class TabOption extends PureComponent<Props> {
           firstTabStyle,
           lastTabStyle,
           viewMode === 'col' && styles.columnModeTabStyle,
-          columnModeTabStyle
+          viewMode === 'col' && columnModeTabStyle
         ]}
         accessible={accessible}
         testID={testID}
